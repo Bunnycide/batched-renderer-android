@@ -1,7 +1,6 @@
 #include <jni.h>
 
 #include "AndroidOut.h"
-#include "forward_renderere/Renderer.h"
 #include "DisplayManager.h"
 #include "batched_renderer_app_state_manager.h"
 

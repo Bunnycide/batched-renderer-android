@@ -10,10 +10,6 @@ project("batched_renderer")
 add_library(batched_renderer SHARED
         main.cpp
         AndroidOut.cpp
-        forward_renderere/Renderer.cpp
-        forward_renderere/Shader.cpp
-        forward_renderere/TextureAsset.cpp
-        forward_renderere/Utility.cpp
         batched_renderer/src/BatchedRenderer.cpp
         batched_renderer/src/DisplayManager.cpp
         batched_renderer/src/AppStateManager.cpp
