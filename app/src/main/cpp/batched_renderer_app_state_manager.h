@@ -18,6 +18,8 @@ private:
     void onAppInit_() override ;
     void onWindowTerminate_() override ;
 
+    double deltaTime;
+
 public:
     BatchedRendererApp& operator=(BatchedRendererApp&) = delete;
 

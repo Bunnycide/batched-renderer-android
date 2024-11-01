@@ -5,6 +5,7 @@
 DisplayManager* DisplayManager::displayManager = nullptr;
 
 void DisplayManager::update(double *delta_time) {
+    eglSwapBuffers(displayManager->display_, displayManager->surface_);
 
     if(! displayManager->drawFrameListeners.empty()){
         for(auto& listener  : displayManager->drawFrameListeners){
@@ -21,8 +22,6 @@ void DisplayManager::init(android_app* pApp) {
     displayManager->chooseDisplayConf();
     displayManager->createWindowSurface();
     displayManager->makeDisplayConfCurrent();
-
-
 }
 
 void DisplayManager::acquireDefaultDisplay() {
@@ -31,7 +30,6 @@ void DisplayManager::acquireDefaultDisplay() {
     display_ = eglGetDisplay(EGL_DEFAULT_DISPLAY);
     EGLint *major = nullptr, *minor = nullptr;
     eglInitialize(display_, major, minor);
-
 }
 
 void DisplayManager::chooseDisplayConf() {
@@ -91,13 +89,15 @@ void DisplayManager::makeDisplayConfCurrent() {
     assert(made_current);
 }
 
-DisplayManager::DisplayManager(android_app *pApp) {
-    this->current_app_context = pApp;
-}
-
 void DisplayManager::addDrawFrameListener(IDrawFrameListener *iDrawFrameListener) {
     if(iDrawFrameListener != nullptr){
         DisplayManager::displayManager->drawFrameListeners.push_back(iDrawFrameListener);
     }
 }
+
+DisplayManager::DisplayManager(android_app *pApp) {
+    this->current_app_context = pApp;
+}
+
+
 

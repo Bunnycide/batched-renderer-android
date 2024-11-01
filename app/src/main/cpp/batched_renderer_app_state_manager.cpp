@@ -12,7 +12,6 @@ void BatchedRendererApp::updateFrame(android_app* pApp) {
 
     do{
         while(! batchedRendererApp->done){
-            aout << "Updating" << std::endl;
 
             batchedRendererApp->inputPollResult =
                     ALooper_pollOnce(batchedRendererApp->timeout, nullptr, &batchedRendererApp->events,
@@ -36,6 +35,8 @@ void BatchedRendererApp::updateFrame(android_app* pApp) {
                     }
             }
         }
+
+        DisplayManager::update(&batchedRendererApp->deltaTime);
 
     } while (!batchedRendererApp->current_app_context->destroyRequested);
 
