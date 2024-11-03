@@ -1,18 +1,20 @@
 #include <jni.h>
 
 #include "AndroidOut.h"
-#include "DisplayManager.h"
-#include "batched_renderer_app_state_manager.h"
+#include "DisplayManager/DisplayManager.h"
+#include "AppStateManager/AppStateManager.h"
 
 #include <game-activity/GameActivity.cpp>
 #include <game-text-input/gametextinput.cpp>
+
+#include "batched_renderer/BatchedRenderer.h"
 
 extern "C" {
 
 #include <game-activity/native_app_glue/android_native_app_glue.c>
 
 void handle_cmd(android_app *pApp, int32_t cmd) {
-    BatchedRendererApp::updateCmd(cmd, pApp);
+    BatchedRenderer::handle_app_state(cmd);
 }
 
 bool motion_event_filter_func(const GameActivityMotionEvent *motionEvent) {
@@ -22,14 +24,13 @@ bool motion_event_filter_func(const GameActivityMotionEvent *motionEvent) {
 }
 
 void android_main(struct android_app *pApp) {
-    aout << "Welcome to android_main" << std::endl;
-    BatchedRendererApp::init(pApp);
-
     // Register an event handler for Android events
     pApp->onAppCmd = handle_cmd;
 
-    android_app_set_motion_event_filter(pApp, motion_event_filter_func);
+    BatchedRenderer::init(pApp);
 
-    BatchedRendererApp::updateFrame(pApp);
+    BatchedRenderer::main_loop(pApp);
+
+    android_app_set_motion_event_filter(pApp, motion_event_filter_func);
 }
 }
