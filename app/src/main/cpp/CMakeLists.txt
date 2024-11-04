@@ -7,6 +7,8 @@ project("batched_renderer")
 
 set(BR_DIR ${CMAKE_SOURCE_DIR}/batched_renderer)
 
+execute_process(COMMAND "bash batched_renderer/shader/compile_shaders.sh")
+
 # Creates your game shared library. The name must be the same as the
 # one used for loading in your Kotlin/Java or AndroidManifest.txt files.
 add_library(batched_renderer SHARED
@@ -15,6 +17,9 @@ add_library(batched_renderer SHARED
         ${BR_DIR}/src/AppStateManager/AppStateManager.cpp
         ${BR_DIR}/src/DisplayManager/DisplayManager.cpp
         ${BR_DIR}/src/Shader/Shader.cpp
+        ${BR_DIR}/src/Batcher/Batcher.cpp
+        ${BR_DIR}/src/ClusterGenerator/cluster-generator.cpp
+        ${BR_DIR}/src/Camera/Camera.cpp
         ${BR_DIR}/BatchedRenderer.cpp
 )
 

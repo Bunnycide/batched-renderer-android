@@ -77,6 +77,16 @@ public:
      *
      */
     static void updateDisplay();
+
+    /**
+     * Get width of the display
+     * */
+    static int getWidth();
+
+    /**
+     * Get height of the display
+     * */
+    static int getHeight();
 };
 
 #endif // DISPLAY_MANAGER_

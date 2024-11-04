@@ -6,6 +6,11 @@
 #include "DisplayManager/DisplayManager.h"
 #include "../AndroidOut.h"
 #include "Shader/Shader.h"
+#include "Batcher/Batcher.h"
+#include <glm/glm.hpp>
+
+#include "Camera/Camera.h"
+#include "ClusterGenerator/cluster-generator.h"
 
 
 class BatchedRenderer : public AppStateManager {
@@ -17,7 +22,16 @@ public:
     static void main_loop(android_app* pApp);
 
 private:
-    Shader* shader;
+    Shader* shader{nullptr};
+
+    Mesh *dodecahedron[2], *batchedMesh;
+    ClusterMesh mesh[2];
+
+    Camera* camera;
+
+    unsigned int vbo;
+
+    BatchedGeometryGenerator* batchedGeometryGenerator;
 
     BatchedRenderer() = default;
 

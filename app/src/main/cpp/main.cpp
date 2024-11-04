@@ -19,6 +19,7 @@ void handle_cmd(android_app *pApp, int32_t cmd) {
 
 bool motion_event_filter_func(const GameActivityMotionEvent *motionEvent) {
     auto sourceClass = motionEvent->source & AINPUT_SOURCE_CLASS_MASK;
+
     return (sourceClass == AINPUT_SOURCE_CLASS_POINTER ||
             sourceClass == AINPUT_SOURCE_CLASS_JOYSTICK);
 }

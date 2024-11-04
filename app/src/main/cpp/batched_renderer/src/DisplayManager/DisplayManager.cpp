@@ -101,3 +101,11 @@ void DisplayManager::updateDisplay() {
     eglSwapBuffers(displayManager->egl_device_display_,
                                  displayManager->egl_surface_);
 }
+
+int DisplayManager::getWidth() {
+    return displayManager->width_;
+}
+
+int DisplayManager::getHeight() {
+    return displayManager->height_;
+}
