@@ -113,8 +113,10 @@ void BatchedRenderer::init(android_app *pApp) {
         batchedRendererInstance->dodecahedron[j] = new Mesh();
         batchedRendererInstance->batchedGeometryGenerator = new BatchedGeometryGenerator();
 
+        // Create a dodecahedra
         generate_dodecahedra( batchedRendererInstance->mesh[j], 1.0f, {x[j], 0.0f, 0.0f});
 
+        // Increase the LOD level for cluster 0
         increaseLODForClusterGroup( batchedRendererInstance->mesh[j], 0);
 
         // TODO: Implement the decrease LOD level func
